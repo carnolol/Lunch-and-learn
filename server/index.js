@@ -23,9 +23,13 @@ app.use(
   session({
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 * 30 }, //* setting cookie time for one month
+    cookie: { maxAge: 1000 * 60 * 60 * 24 }, //* setting cookie time for one day
     secret: SESSION_SECRET
   })
 );
 
 //* Creating our user Endpoints
+app.get("/getLoggedInUser", userController.getLoggedInUser);
+app.post("/login", userController.login);
+app.post("/register", userController.register);
+app.delete("/logout", userController.logout);
