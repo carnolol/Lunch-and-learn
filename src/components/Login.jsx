@@ -59,8 +59,8 @@ function Login() {
     <div className='login'>
       {user.profile_pic && (
         <div>
-          <h2>{`${user.name} has logged in!`}</h2>
-          <img src={user.profile_pic} alt='robot' />
+          <h2 className='profile-header'>{`${user.name} has logged in!`}</h2>
+          <img className='profile-pic' src={user.profile_pic} alt='robot' />
         </div>
       )}
 

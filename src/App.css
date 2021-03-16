@@ -1,9 +1,14 @@
 .App {
   text-align: center;
   font-size: 100px;
+  height: 100vh;
+  width: 100vw;
+  background: rgb(170, 170, 170);
+
 }
 
 .App > h1 {
-  margin: 100px 0 ;
+  color: white;
+  padding: 100px 0 ;
 }
 
