@@ -32,10 +32,10 @@ module.exports = {
       return res.status(409).send("This name is taken! Please Login.");
     }
 
-    // const salt = bcrypt.genSaltSync(10); // built in function in bcrypt that tells us how strong we want our hashing to be.
-    // const hash = bcrypt.hashSync(password, salt); // takes in the users password and the salt we created so it can create a hashed password
+    const salt = bcrypt.genSaltSync(10); // built in function in bcrypt that tells us how strong we want our hashing to be.
+    const hash = bcrypt.hashSync(password, salt); // takes in the users password and the salt we created so it can create a hashed password
     const profile_pic = `https://robohash.org/${name}`; //profile pic will display when user is logged in
-    const newUser = await db.register_user([name, password, profile_pic]); //new hashed password into our DB
+    const newUser = await db.register_user([name, hash, profile_pic]); //new hashed password into our DB
 
     req.session.user = newUser[0]; // put new registered user on our session
     res.status(200).send(req.session.user); // Everything is all good and send it.
