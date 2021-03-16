@@ -16,13 +16,17 @@ function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
     const body = {
-      name: name,
-      password: password
+      name,
+      password
     };
     if (name && password) {
+      setError(false);
       axios
         .post("/login", body)
-        .then((res) => setUser(res.data))
+        .then((res) => {
+          console.log(res);
+          setUser(res.data);
+        })
         .catch((err) => console.log(err));
     } else {
       setError(true);
@@ -32,13 +36,13 @@ function Login() {
 
   const handleRegister = () => {
     const body = {
-      name: name,
-      password: password
+      name,
+      password
     };
     axios
       .post("/register", body)
       .then((res) => setUser(res.data))
-      .catch((err) => alert(`You already have an account, Please login!`));
+      .catch((err) => alert(err));
     handleReset();
   };
 
@@ -49,15 +53,23 @@ function Login() {
       .catch((err) => alert(err));
   };
 
+  console.log("FRONT END USER", user);
+
   return (
     <div className='login'>
-      {user.profile_pic ? <img src={user.profile_pic} alt='robot' /> : null}
+      {user.profile_pic && (
+        <div>
+          <h2 className='profile-header'>{`${user.name} has logged in!`}</h2>
+          <img className='profile-pic' src={user.profile_pic} alt='robot' />
+        </div>
+      )}
 
       <input
         value={name}
         placeholder='Name'
         onChange={(e) => setName(e.target.value)}
       />
+      {error && <h1>Fill out the inputs nerd</h1>}
       <input
         value={password}
         placeholder='Password'
