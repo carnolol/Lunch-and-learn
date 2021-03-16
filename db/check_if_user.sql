@@ -1,2 +1,2 @@
 select * from bb_users
-where password = $1
+where name = $1
